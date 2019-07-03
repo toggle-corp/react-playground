@@ -1,0 +1,25 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .content {
+        display: flex;
+        flex-grow: 1;
+
+        $width-tabs: 240px;
+
+        .tabs {
+            flex-basis: $width-tabs;
+            flex-shrink: 0;
+        }
+        .container {
+            display: flex;
+            flex-grow: 1;
+
+            .viz {
+                flex-grow: 1;
+            }
+        }
+    }
+}
