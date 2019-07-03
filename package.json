@@ -1,11 +1,17 @@
 {
-    "name": "1",
+    "name": "react-playground",
     "version": "1.0.0",
-    "description": "react-playground",
+    "description": "A playground app for all react-store(https://github.com/toggle-corp/react-store) components",
     "main": "src/index.tsx",
-    "keywords": [],
+    "private": true,
+    "keywords": [
+        "react",
+        "react-store",
+        "togglecorp"
+    ],
+    "homepage": "https://toggle-corp.github.io/react-playground/",
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "sideEffects": false,
     "scripts": {
         "start": "webpack-dev-server --mode development --config config/webpack.dev.js --env.NODE_ENV=development --history-api-fallback",
@@ -15,7 +21,9 @@
         "test:watch": "jest --watch",
         "typecheck": "tsc",
         "lint": "eslint ./src --rule 'import/no-unresolved: 0'",
-        "test:coverage": "jest --coverage"
+        "test:coverage": "jest --coverage",
+        "predeploy": "yarn run build",
+        "deploy": "gh-pages -d build"
     },
     "jest": {
         "setupFiles": [
@@ -110,6 +118,7 @@
         "extract-text-webpack-plugin": "^4.0.0-beta.0",
         "file-loader": "^4.0.0",
         "fs": "^0.0.1-security",
+        "gh-pages": "^2.0.1",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
         "identity-obj-proxy": "^3.0.0",

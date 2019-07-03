@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+ - lts/*
+cache:
+ directories:
+ - node_modules
+before_install:
+ - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+ - export PATH="$HOME/.yarn/bin:$PATH"
+ - mkdir -p src/vendor
+ - git clone https://github.com/toggle-corp/react-store.git src/vendor/react-store
+
+script:
+ - yarn run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: ./build
+  on:
+    branch: develop
