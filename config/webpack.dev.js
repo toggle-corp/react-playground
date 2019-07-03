@@ -155,7 +155,7 @@ module.exports = (env) => {
             new HtmlWebpackPlugin({
                 template: appIndexHtml,
                 filename: './index.html',
-                title: '__APP_ID__',
+                title: '1',
                 favicon: path.resolve(appFavicon),
                 chunksSortMode: 'none',
             }),

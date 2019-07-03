@@ -26,19 +26,11 @@ export type SomeRoute = Route | NavbarRoute | FallbackRoute;
 const routeSettings: SomeRoute[] = [
     {
         path: '/',
-        name: 'apple',
-        title: 'Apple',
-        load: () => import('../views/Apple'),
+        name: 'Visualization',
+        title: 'Visualization',
+        load: () => import('../views/Visualization'),
         navbar: true,
     },
-    {
-        name: 'orange',
-        title: 'Orange',
-        path: '/orange/',
-        load: () => import('../views/Orange'),
-        navbar: true,
-    },
-
     {
         name: 'fourHundredThree',
         title: '403',
