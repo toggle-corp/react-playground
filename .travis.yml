@@ -21,6 +21,7 @@ jobs:
         - docker run --rm -it -v $(pwd):/code node:8.16.0-alpine sh -c 'cd code && yarn install && yarn build'
         - sudo chown $USER:$USER -R ./build/
         - cp ./build/index.html ./build/404.html
+        - echo ${CUSTOM_DOMAIN:-playground.togglecorp.com} > ./build/CNAME
       deploy:
         provider: pages
         skip_cleanup: true
