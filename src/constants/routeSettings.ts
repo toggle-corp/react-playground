@@ -37,7 +37,6 @@ const routeSettings: SomeRoute[] = [
         path: '/403/',
         load: () => import('../views/FourHundredThree'),
     },
-
     {
         name: 'fourHundredFour',
         title: '404',

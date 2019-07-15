@@ -14,7 +14,6 @@ import CorrelationMatrix from '#rscz/CorrelationMatrix';
 import Dendrogram from '#rscz/Dendrogram';
 import DonutChart from '#rscz/DonutChart';
 import ForceDirectedGraph from '#rscz/ForceDirectedGraph';
-import ForceDirectedGraphContainer from '#rscz/ForceDirectedGraphContainer';
 import GoogleOrgChart from '#rscz/GoogleOrgChart';
 import HorizontalBar from '#rscz/HorizontalBar';
 import OrgChart from '#rscz/OrgChart';
@@ -33,8 +32,6 @@ import TreeMap from '#rscz/TreeMap';
 import VerticalBarChart from '#rscz/VerticalBarChart';
 import WordCloud from '#rscz/WordCloud';
 import ZoomableTreeMap from '#rscz/ZoomableTreeMap';
-import wrapViz from '#rscz/VizWrapper';
-
 import Histogram from '#rscz/Histogram';
 
 import barData from '#resources/data/barData.js';
