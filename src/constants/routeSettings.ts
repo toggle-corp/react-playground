@@ -32,6 +32,13 @@ const routeSettings: SomeRoute[] = [
         navbar: true,
     },
     {
+        path: '/Viewer',
+        name: 'Viewer',
+        title: 'Viewer',
+        load: () => import('../views/Viewer'),
+        navbar: true,
+    },
+    {
         name: 'fourHundredThree',
         title: '403',
         path: '/403/',
