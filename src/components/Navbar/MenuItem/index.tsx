@@ -19,7 +19,7 @@ class MenuItem extends React.PureComponent<Props> {
             className,
             disabled,
         } = this.props;
-
+        console.log(isCurrent);
         return {
             className: _cs(
                 className,
