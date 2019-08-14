@@ -8,8 +8,10 @@ import { routeSettings, hasNavbar, NavbarRoute } from '#constants';
 import MenuItem from './MenuItem';
 
 import styles from './styles.scss';
+import Visualization from '#views/Visualization';
 
 const pages = routeSettings.filter(hasNavbar);
+
 
 interface Props {
     className?: string;

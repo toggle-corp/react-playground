@@ -2,22 +2,32 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    overflow: auto;
 
     .content {
         display: flex;
         flex-grow: 1;
-
-        $width-tabs: 240px;
+        overflow: auto;
+        $width-collapsed: 10px;
+        $width-tabs: 260px;
 
         .tabs {
             flex-basis: $width-tabs;
             flex-shrink: 0;
+            overflow: auto;
+            background: var(--color-text-on-dark);
+            a{
+                opacity: 1;
+            }
         }
+        
         .container {
             display: flex;
             flex-grow: 1;
+            overflow: auto;
 
             .viz {
+                overflow: auto;
                 flex-grow: 1;
             }
         }
