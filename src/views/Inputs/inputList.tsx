@@ -6,7 +6,6 @@ import DateFilter from '#rsci/DateFilter';
 import DateInput from '#rsci/DateInput';
 import DatePicker from '#rsci/DatePicker';
 import FormattedTextArea from '#rsci/FormattedTextArea';
-import ListInput from '#rsci/ListInput';
 import ListSelection from '#rsci/ListSelection';
 import MultiSelectInput from '#rsci/MultiSelectInput';
 import NumberInput from '#rsci/NumberInput';
@@ -20,13 +19,10 @@ import SearchSelectInput from '#rsci/SearchSelectInput';
 import SegmentInput from '#rsci/SegmentInput';
 import SelectInput from '#rsci/SelectInput';
 import SelectInputWithList from '#rsci/SelectInputWithList';
-import SimpleListInput from '#rsci/SimpleListInput';
-import TabularSelectInput from '#rsci/TabularSelectInput';
 import TextArea from '#rsci/TextArea';
 import TextInput from '#rsci/TextInput';
 import TimeFilter from '#rsci/TimeFilter';
 import TimeInput from '#rsci/TimeInput';
-import TreeSelection from '#rsci/TreeSelection';
 
 export interface InputElement {
     key: string;
@@ -95,6 +91,7 @@ const inputList: InputElement[] = [
         description: 'Date input lets user to select a date from either manual entry or through a helper popup.',
         component: DateInput,
         props: {
+            label: 'Select a date',
             faramElementName: 'dateInput',
         },
     },
@@ -113,17 +110,8 @@ const inputList: InputElement[] = [
         description: 'Formatted text area',
         component: FormattedTextArea,
         props: {
+            label: 'Enter text',
             faramElementName: 'formattedTextArea',
-        },
-    },
-    {
-        key: 'listInput',
-        title: 'List input',
-        description: 'List input',
-        component: ListInput,
-        props: {
-            options,
-            faramElementName: 'listInput',
         },
     },
     {
@@ -132,6 +120,7 @@ const inputList: InputElement[] = [
         description: 'List selection',
         component: ListSelection,
         props: {
+            label: 'Select option(s)',
             faramElementName: 'listSelection',
             options,
         },
@@ -142,6 +131,7 @@ const inputList: InputElement[] = [
         description: 'Multi select input',
         component: MultiSelectInput,
         props: {
+            label: 'Select option(s)',
             faramElementName: 'multiSelectInput',
             options,
         },
@@ -152,6 +142,7 @@ const inputList: InputElement[] = [
         description: 'Number input',
         component: NumberInput,
         props: {
+            label: 'Enter a number',
             faramElementName: 'numberInput',
         },
     },
@@ -172,6 +163,7 @@ const inputList: InputElement[] = [
         description: 'Range filter',
         component: RangeFilter,
         props: {
+            label: 'Select option',
             faramElementName: 'rangeFilter',
             options,
         },
@@ -192,9 +184,9 @@ const inputList: InputElement[] = [
         description: 'Scale input',
         component: ScaleInput,
         props: {
+            label: 'Select an option',
             faramElementName: 'scaleInput',
             options,
-            // colorSelector
         },
     },
     {
@@ -203,6 +195,7 @@ const inputList: InputElement[] = [
         description: 'Search input',
         component: SearchInput,
         props: {
+            label: 'Search',
             faramElementName: 'searchInput',
             showHintAndError: false,
         },
@@ -213,6 +206,7 @@ const inputList: InputElement[] = [
         description: 'Search multi select input',
         component: SearchMultiSelectInput,
         props: {
+            label: 'Search',
             faramElementName: 'searchMultiSelectInput',
             options,
         },
@@ -223,6 +217,7 @@ const inputList: InputElement[] = [
         description: 'Search select input',
         component: SearchSelectInput,
         props: {
+            label: 'Search',
             faramElementName: 'searchSelectInput',
             options,
         },
@@ -233,6 +228,7 @@ const inputList: InputElement[] = [
         description: 'Segment input',
         component: SegmentInput,
         props: {
+            label: 'Select an option',
             faramElementName: 'segmentInput',
             options,
         },
@@ -243,6 +239,7 @@ const inputList: InputElement[] = [
         description: 'Select input',
         component: SelectInput,
         props: {
+            label: 'Select an option',
             faramElementName: 'selectInput',
             options,
         },
@@ -253,6 +250,7 @@ const inputList: InputElement[] = [
         description: 'Select input with list',
         component: SelectInputWithList,
         props: {
+            label: 'Select option(s)',
             faramElementName: 'selectInputWithList',
             options,
         },
@@ -263,6 +261,7 @@ const inputList: InputElement[] = [
         description: 'Textarea',
         component: TextArea,
         props: {
+            label: 'Enter text',
             faramElementName: 'textArea',
         },
     },
@@ -272,6 +271,7 @@ const inputList: InputElement[] = [
         description: 'Text input',
         component: TextInput,
         props: {
+            label: 'Enter text',
             faramElementName: 'textInput',
         },
     },
@@ -281,6 +281,7 @@ const inputList: InputElement[] = [
         description: 'Time filter',
         component: TimeFilter,
         props: {
+            label: 'Select a duration',
             faramElementName: 'timeFilter',
         },
     },
@@ -290,6 +291,7 @@ const inputList: InputElement[] = [
         description: 'Time input',
         component: TimeInput,
         props: {
+            label: 'Select a time',
             faramElementName: 'timeInput',
         },
     },

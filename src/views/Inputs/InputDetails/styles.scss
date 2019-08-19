@@ -22,6 +22,11 @@
             flex-grow: 1;
             padding: var(--spacing-medium);
             overflow: auto;
+
+            .preview {
+                border: var(--width-separator-thin) solid var(--color-separator-light);
+                padding: var(--spacing-extra-large);
+            }
         }
     }
 
