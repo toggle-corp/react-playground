@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Checkbox from '#rsci/Checkbox';
 import ColorInput from '#rsci/ColorInput';
 import DateFilter from '#rsci/DateFilter';
@@ -11,10 +13,6 @@ import NumberInput from '#rsci/NumberInput';
 import RadioInput from '#rsci/RadioInput';
 import RangeFilter from '#rsci/RangeFilter';
 import RawFileInput from '#rsci/RawFileInput';
-import RawInput from '#rsci/RawInput';
-import ReCaptcha from '#rsci/ReCaptcha';
-import RemovableListItem from '#rsci/RemovableListItem';
-import RotatingInput from '#rsci/RotatingInput';
 import ScaleInput from '#rsci/ScaleInput';
 import SearchInput from '#rsci/SearchInput';
 import SearchMultiSelectInput from '#rsci/SearchMultiSelectInput';
@@ -45,18 +43,20 @@ export interface InputElement {
 interface Option {
     key: string;
     label: string;
+    color: string;
 }
 
 const options: Option[] = [
-    { key: 'option1', label: 'Option 1' },
-    { key: 'option2', label: 'Option 2' },
-    { key: 'option3', label: 'Option 3' },
-    { key: 'option4', label: 'Option 4' },
-    { key: 'option5', label: 'Option 5' },
+    { key: 'option1', label: 'Option 1', color: '#ef9a9a' },
+    { key: 'option2', label: 'Option 2', color: '#ef5350' },
+    { key: 'option3', label: 'Option 3', color: '#e53935' },
+    { key: 'option4', label: 'Option 4', color: '#c62828' },
+    { key: 'option5', label: 'Option 5', color: '#7f0000' },
 ];
 
 const optionKeySelector = (d: Option) => d.key;
 const optionLabelSelector = (d: Option) => d.label;
+const optionColorSelector = (d: Option) => d.color;
 
 const inputList: InputElement[] = [
     {
@@ -122,6 +122,7 @@ const inputList: InputElement[] = [
         description: 'List input',
         component: ListInput,
         props: {
+            options,
             faramElementName: 'listInput',
         },
     },
@@ -132,6 +133,7 @@ const inputList: InputElement[] = [
         component: ListSelection,
         props: {
             faramElementName: 'listSelection',
+            options,
         },
     },
     {
@@ -141,6 +143,7 @@ const inputList: InputElement[] = [
         component: MultiSelectInput,
         props: {
             faramElementName: 'multiSelectInput',
+            options,
         },
     },
     {
@@ -170,6 +173,7 @@ const inputList: InputElement[] = [
         component: RangeFilter,
         props: {
             faramElementName: 'rangeFilter',
+            options,
         },
     },
     {
@@ -179,42 +183,7 @@ const inputList: InputElement[] = [
         component: RawFileInput,
         props: {
             faramElementName: 'rawFileInput',
-        },
-    },
-    {
-        key: 'rawInput',
-        title: 'Raw input',
-        description: 'Raw input',
-        component: RawInput,
-        props: {
-            faramElementName: 'rawInput',
-        },
-    },
-    {
-        key: 'reCaptcha',
-        title: 'reCaptcha',
-        description: 'reCaptacha',
-        component: ReCaptcha,
-        props: {
-            faramElementName: 'reCaptcha',
-        },
-    },
-    {
-        key: 'removableListItem',
-        title: 'Removable list item',
-        description: 'Removable list item',
-        component: RemovableListItem,
-        props: {
-            faramElementName: 'removableListItem',
-        },
-    },
-    {
-        key: 'rotatingInput',
-        title: 'Rotating input',
-        description: 'Rotating input',
-        component: RotatingInput,
-        props: {
-            faramElementName: 'rotatingInput',
+            children: 'Select a file',
         },
     },
     {
@@ -224,6 +193,8 @@ const inputList: InputElement[] = [
         component: ScaleInput,
         props: {
             faramElementName: 'scaleInput',
+            options,
+            // colorSelector
         },
     },
     {
@@ -233,6 +204,7 @@ const inputList: InputElement[] = [
         component: SearchInput,
         props: {
             faramElementName: 'searchInput',
+            showHintAndError: false,
         },
     },
     {
@@ -242,6 +214,7 @@ const inputList: InputElement[] = [
         component: SearchMultiSelectInput,
         props: {
             faramElementName: 'searchMultiSelectInput',
+            options,
         },
     },
     {
@@ -251,6 +224,7 @@ const inputList: InputElement[] = [
         component: SearchSelectInput,
         props: {
             faramElementName: 'searchSelectInput',
+            options,
         },
     },
     {
@@ -260,6 +234,7 @@ const inputList: InputElement[] = [
         component: SegmentInput,
         props: {
             faramElementName: 'segmentInput',
+            options,
         },
     },
     {
@@ -269,6 +244,7 @@ const inputList: InputElement[] = [
         component: SelectInput,
         props: {
             faramElementName: 'selectInput',
+            options,
         },
     },
     {
@@ -278,24 +254,7 @@ const inputList: InputElement[] = [
         component: SelectInputWithList,
         props: {
             faramElementName: 'selectInputWithList',
-        },
-    },
-    {
-        key: 'simpleListInput',
-        title: 'Simple list input',
-        description: 'Simple list input',
-        component: SimpleListInput,
-        props: {
-            faramElementName: 'simpleListInput',
-        },
-    },
-    {
-        key: 'tabularSelectInput',
-        title: 'Tabular select input',
-        description: 'Tabular select input',
-        component: TabularSelectInput,
-        props: {
-            faramElementName: 'tabularSelectInput',
+            options,
         },
     },
     {
@@ -332,15 +291,6 @@ const inputList: InputElement[] = [
         component: TimeInput,
         props: {
             faramElementName: 'timeInput',
-        },
-    },
-    {
-        key: 'treeSelection',
-        title: 'Tree selection',
-        description: 'Tree selection',
-        component: TreeSelection,
-        props: {
-            faramElementName: 'treeSelection',
         },
     },
 ];
