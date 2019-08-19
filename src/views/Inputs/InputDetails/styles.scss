@@ -1,0 +1,40 @@
+.input-details {
+    display: flex;
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .header {
+            flex-shrink: 0;
+
+            .heading {
+                padding: var(--spacing-medium);
+            }
+
+            .description {
+                padding: var(--spacing-medium);
+            }
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: var(--spacing-medium);
+            overflow: auto;
+        }
+    }
+
+    .right {
+        flex-grow: 0;
+        flex-shrink: 0;
+        border-left: var(--width-separator-thin) solid var(--color-separator);
+        width: var(--width-properties-pane);
+
+        .header {
+            .heading {
+                padding: var(--spacing-medium);
+            }
+        }
+    }
+}

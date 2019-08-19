@@ -19,7 +19,7 @@ class MenuItem extends React.PureComponent<Props> {
             className,
             disabled,
         } = this.props;
-        console.log(isCurrent);
+
         return {
             className: _cs(
                 className,
@@ -51,7 +51,7 @@ class MenuItem extends React.PureComponent<Props> {
                         )
                     }
                 >
-                    <div className={styles.menuTitle}>
+                    <div className={styles.title}>
                         {title}
                     </div>
                 </div>
@@ -62,7 +62,7 @@ class MenuItem extends React.PureComponent<Props> {
                 to={link}
                 getProps={this.getProps}
             >
-                <div className={styles.menuTitle}>
+                <div className={styles.title}>
                     {title}
                 </div>
             </Link>

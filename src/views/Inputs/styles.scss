@@ -1,0 +1,33 @@
+.inputs {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+    .header {
+        flex-shrink: 0;
+        padding: var(--spacing-medium);
+    }
+
+    .content {
+        display: flex;
+        flex-grow: 1;
+        overflow: auto;
+
+        .tabs {
+            flex-grow: 0;
+            flex-shrink: 0;
+            width: var(--width-left-pane);
+            overflow: auto;
+        }
+
+        .faram {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .input-details {
+                flex-grow: 1;
+            }
+        }
+    }
+}

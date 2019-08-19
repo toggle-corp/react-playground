@@ -38,15 +38,13 @@ class Navbar extends React.PureComponent<Props> {
 
         return (
             <nav className={className}>
-                <div className={styles.menu}>
-                    <ListView
-                        data={pages}
-                        keySelector={Navbar.menuKeySelector}
-                        renderer={MenuItem}
-                        rendererParams={this.menuRendererParams}
-                        className={styles.menuItems}
-                    />
-                </div>
+                <ListView
+                    className={styles.menu}
+                    data={pages}
+                    keySelector={Navbar.menuKeySelector}
+                    renderer={MenuItem}
+                    rendererParams={this.menuRendererParams}
+                />
             </nav>
         );
     }

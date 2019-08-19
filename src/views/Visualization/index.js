@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { _cs } from '@togglecorp/fujs';
 import { randomUniform } from 'd3-random';
 import { range } from 'd3-array';
-
-import styles from './styles.scss';
 
 import VerticalTabs from '#rscv/VerticalTabs';
 import MultiViewContainer from '#rscv/MultiViewContainer';
@@ -47,6 +46,8 @@ import sankeyData from '#resources/data/sankeyData';
 import stackedData from '#resources/data/stackedData';
 import streamData from '#resources/data/streamData';
 import words from '#resources/data/wordCloudData';
+
+import styles from './styles.scss';
 
 const histogramData = range(2000).map(randomUniform(0, 0));
 
@@ -415,8 +416,10 @@ class Visualization extends Component {
     }
 
     render() {
+        const { className } = this.props;
+
         return (
-            <div className={styles.dashboard}>
+            <div className={_cs(styles.dashboard, className)}>
                 <div className={styles.content}>
                     <VerticalTabs
                         tabs={this.tabs}

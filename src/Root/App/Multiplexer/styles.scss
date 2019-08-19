@@ -33,7 +33,6 @@ body {
 
     a {
         outline: none;
-        text-transform: uppercase;
         text-decoration: none;
         color: inherit;
     }
@@ -44,7 +43,6 @@ body {
     h4,
     h5 {
         margin: 0;
-        text-transform: uppercase;
         color: var(--color-primary);
         font-family: var(--font-family-heading);
         font-weight: var(--font-weight-heading);
@@ -78,8 +76,9 @@ body {
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            background-color: var(--color-background);
+            padding: var(--spacing-medium);
             overflow: auto;
-            background-color: var(--color-foreground);
 
 
             .loading {
@@ -92,7 +91,13 @@ body {
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
+                border: var(--width-separator-thin) solid var(--color-separator);
+                background-color: var(--color-foreground);
                 overflow: auto;
+
+                .component {
+                    flex-grow: 1;
+                }
 
                 .page-error,
                 .retryable-page-error {

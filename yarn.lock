@@ -787,10 +787,17 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.3.2"
 
-"@babel/runtime@^7.0.0-beta.46", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5":
+"@babel/runtime@^7.0.0-beta.46", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
   integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
+"@babel/runtime@^7.5.5":
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
+  integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -1069,22 +1076,27 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@togglecorp/faram@^1.1.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@togglecorp/faram/-/faram-1.2.0.tgz#a7453648db5b7438f8f953210a8fc92aa26a1330"
-  integrity sha512-j/lprBAa7YQEhtPoT89Vg5jjG/mMCGDB8Nd0KHuhjjGSfYjLQxxpbcx9Zl7/0duEEjoGAdfeTWx/6kRzrffJMQ==
+"@togglecorp/faram@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@togglecorp/faram/-/faram-1.2.1.tgz#d7ffe1b688740f2d3a7bae76d3a5a46d632ff8cc"
+  integrity sha512-Wcbopss6K0erzJZAnL7cWrYNq2DpADOEJ6iGZW1dcZ+7MnrkELFGeKSq4JZ9bTqaL+KMUZGPnPF5ztK6JTuI4Q==
   dependencies:
-    "@babel/runtime" "^7.3.1"
-    "@togglecorp/fujs" "^1.3.0"
-    hoist-non-react-statics "^3.0.1"
-    immer "^2.0.0"
-    memoize-one "^5.0.0"
-    prop-types "^15.6.2"
+    "@babel/runtime" "^7.5.5"
+    "@togglecorp/fujs" "^1.8.0"
+    hoist-non-react-statics "^3.3.0"
+    immer "^2.1.5"
+    memoize-one "^5.0.5"
+    prop-types "^15.7.2"
 
-"@togglecorp/fujs@^1.2.1", "@togglecorp/fujs@^1.3.0", "@togglecorp/fujs@^1.6.1":
+"@togglecorp/fujs@^1.2.1", "@togglecorp/fujs@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@togglecorp/fujs/-/fujs-1.6.1.tgz#a6f93228563cd99491ba09cb8d841af44f503f11"
   integrity sha512-WgdUxHoG+EOdah/R1hGaKs79ONz5o2ACJ5vsxk624WHNArdxwL3TOGw5KE8n8E3cQX3OjPDi12ms9x21220ruQ==
+
+"@togglecorp/fujs@^1.8.0":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@togglecorp/fujs/-/fujs-1.8.1.tgz#5a2933a45b07fc2c9587111ef6e81e1bad3a1ac4"
+  integrity sha512-Iy4+8QjhTfwz6p8lTAaA0dBEDRm6umW4EgeiMiRg/fKLfgwNdiJBGn4hp77sRBqxE9OZWusNDumLLo2DOlQGEQ==
 
 "@togglecorp/ravl@^1.2.2":
   version "1.2.2"
@@ -5181,7 +5193,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
   integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
@@ -5444,7 +5456,7 @@ immediate@~3.0.5:
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
   integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
 
-immer@^2.0.0:
+immer@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/immer/-/immer-2.1.5.tgz#0389947455c5a2c7a47f1e6f415c9d1a62a1ebed"
   integrity sha512-xyjQyTBYIeiz6jd02Hg12jV+9QISwF1crLcwTlzHpWH4e0ryNWj1kacpTwimK3bJV5NKKXw458G2vpqoB/inFA==
@@ -6968,10 +6980,15 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
-memoize-one@^5.0.0, memoize-one@^5.0.4:
+memoize-one@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.0.4.tgz#005928aced5c43d890a4dfab18ca908b0ec92cbc"
   integrity sha512-P0z5IeAH6qHHGkJIXWw0xC2HNEgkx/9uWWBQw64FJj3/ol14VYdfVGWWr0fXfjhhv3TKVIqUq65os6O4GUNksA==
+
+memoize-one@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.0.5.tgz#8cd3809555723a07684afafcd6f756072ac75d7e"
+  integrity sha512-ey6EpYv0tEaIbM/nTDOpHciXUvd+ackQrJgEzBwemhZZIWZjcyodqEcrmqDy2BKRTM3a65kKBV4WtLXJDt26SQ==
 
 memory-fs@^0.4.0, memory-fs@^0.4.1, memory-fs@~0.4.1:
   version "0.4.1"

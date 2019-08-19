@@ -1,22 +1,21 @@
 .dashboard {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     overflow: auto;
 
     .content {
         display: flex;
         flex-grow: 1;
         overflow: auto;
-        $width-collapsed: 10px;
-        $width-tabs: 260px;
 
         .tabs {
-            flex-basis: $width-tabs;
+            flex-basis: var(--width-left-pane);
             flex-shrink: 0;
-            overflow: auto;
+            border-right: var(--width-separator-thin) solid var(--color-separator);
             background: var(--color-text-on-dark);
-            a{
+            overflow: auto;
+
+            a {
                 opacity: 1;
             }
         }
@@ -27,8 +26,8 @@
             overflow: auto;
 
             .viz {
-                overflow: auto;
                 flex-grow: 1;
+                overflow: auto;
             }
         }
     }
