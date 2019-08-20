@@ -18,7 +18,7 @@ interface Props {
 }
 
 interface State {
-    faramValues: {};
+    faramValues: unknown;
 }
 
 interface FaramSchema {
@@ -28,39 +28,73 @@ interface FaramSchema {
 }
 
 export default class Inputs extends React.PureComponent<Props, State> {
+    private static inputGroupKeySelector = (item: string) => {
+        const myInput = inputList.find(input => input.key === item);
+        if (!myInput) {
+            return undefined;
+        }
+        return myInput.groupKey;
+    };
+
+    private static inputGroupRendererParams = (groupKey: string) => ({
+        children: groupKey,
+    })
+
+    private static inputGroupComparator = () => 0;
+
     public constructor(props: Props) {
         super(props);
 
         this.state = {
-            faramValues: {
-            },
+            faramValues: {},
         };
 
         this.faramSchema = {
-            fields: listToMap(inputList, d => d.key, d => []),
+            fields: listToMap(inputList, d => d.key, () => []),
         };
 
-        this.views = listToMap(inputList, d => d.key, d => ({
-            component: InputDetails,
-            rendererParams: () => ({
-                title: d.title,
-                component: d.component,
-                description: d.description,
-                componentProps: d.props,
-                className: styles.inputDetails,
+        this.views = listToMap(
+            inputList,
+            d => d.key,
+            d => ({
+                component: InputDetails,
+                rendererParams: () => ({
+                    title: d.title,
+                    component: d.component,
+                    description: d.description,
+                    componentProps: d.props,
+                    className: styles.inputDetails,
+                }),
             }),
-        }));
+        );
 
-        this.tabs = listToMap(inputList, d => d.key, d => d.title);
+        this.tabs = listToMap(
+            inputList,
+            d => d.key,
+            d => d.title,
+        );
     }
 
-    private faramSchema = {};
+    private faramSchema: any;
 
-    private views = {};
+    private views: {
+        [key: string]: {
+            component: React.ReactType;
+            rendererParams: () => {
+                title: React.ReactNode;
+                component: React.ReactType;
+                description: React.ReactNode;
+                componentProps: any;
+                className: string;
+            };
+        };
+    };
 
-    private tabs = {};
+    private tabs: {
+        [key: string]: React.ReactNode;
+    };
 
-    private handleFaramChange = (faramValues: any) => {
+    private handleFaramChange = (faramValues: unknown) => {
         this.setState({ faramValues });
     }
 
@@ -82,6 +116,9 @@ export default class Inputs extends React.PureComponent<Props, State> {
                         className={styles.tabs}
                         tabs={this.tabs}
                         useHash
+                        groupKeySelector={Inputs.inputGroupKeySelector}
+                        groupRendererParams={Inputs.inputGroupRendererParams}
+                        groupComparator={Inputs.inputGroupComparator}
                     />
                     <Faram
                         className={styles.faram}

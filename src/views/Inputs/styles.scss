@@ -5,6 +5,7 @@
 
     .header {
         flex-shrink: 0;
+        border-bottom: var(--width-separator-thin) solid var(--color-separator);
         padding: var(--spacing-medium);
     }
 
@@ -16,7 +17,8 @@
         .tabs {
             flex-grow: 0;
             flex-shrink: 0;
-            width: var(--width-left-pane);
+            border-right: var(--width-separator-thin) solid var(--color-separator);
+            width: auto;
             overflow: auto;
         }
 

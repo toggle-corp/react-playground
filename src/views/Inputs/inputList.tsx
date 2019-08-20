@@ -26,20 +26,21 @@ import TimeInput from '#rsci/TimeInput';
 
 export interface InputElement {
     key: string;
-    title: string | React.ElementType;
-    description: string | React.ElementType;
+    title: React.ReactNode;
+    description: React.ReactNode;
     component: React.ElementType;
-    usage?: string | React.ElementType;
+    usage?: React.ReactNode;
     props: {
         faramElementName: string;
-        [key: string]: any;
+        [key: string]: unknown;
     };
+    groupKey: string;
 }
 
 interface Option {
     key: string;
     label: string;
-    color: string;
+    color?: string;
 }
 
 const options: Option[] = [
@@ -50,251 +51,329 @@ const options: Option[] = [
     { key: 'option5', label: 'Option 5', color: '#7f0000' },
 ];
 
-const optionKeySelector = (d: Option) => d.key;
-const optionLabelSelector = (d: Option) => d.label;
-const optionColorSelector = (d: Option) => d.color;
+const fruits: Option[] = [
+    { key: '1', label: 'Apricot' },
+    { key: '2', label: 'Apple' },
+    { key: '3', label: 'Mango' },
+    { key: '4', label: 'Banana' },
+    { key: '5', label: 'Pineapple' },
+    { key: '6', label: 'Orange' },
+    { key: '7', label: 'Coconut' },
+    { key: '8', label: 'Lime' },
+    { key: '9', label: 'Papaya' },
+    { key: '10', label: 'Grape' },
+    { key: '11', label: 'Watermelon' },
+    { key: '12', label: 'Plum' },
+    { key: '13', label: 'Pear' },
+    { key: '14', label: 'Peach' },
+    { key: '15', label: 'Lemon' },
+    { key: '16', label: 'Avocado' },
+];
+
+const vegetables: Option[] = [
+    { key: '1', label: 'Asparagus' },
+    { key: '2', label: 'Black Beans' },
+    { key: '3', label: 'Chick Peas' },
+    { key: '4', label: 'Kidney Beans' },
+    { key: '5', label: 'Broccoli' },
+    { key: '6', label: 'Cabbage' },
+    { key: '7', label: 'Cauliflower' },
+    { key: '8', label: 'Spinach' },
+    { key: '9', label: 'Lettuce' },
+    { key: '10', label: 'Mushroom' },
+    { key: '11', label: 'Nettle' },
+    { key: '12', label: 'Okra' },
+    { key: '13', label: 'Carrot' },
+    { key: '14', label: 'Radish' },
+    { key: '15', label: 'Turnip' },
+    { key: '16', label: 'Cucumber' },
+    { key: '17', label: 'Squash' },
+    { key: '18', label: 'Pumpkin' },
+    { key: '19', label: 'Gourd' },
+    { key: '20', label: 'Tomato' },
+    { key: '21', label: 'Potato' },
+];
 
 const inputList: InputElement[] = [
+    // Text inputs
     {
-        key: 'checkbox',
-        title: 'Checkbox',
-        description: 'Checkboxes allow the user to select one or more items from a set.',
-        component: Checkbox,
+        key: 'textInput',
+        title: 'Text Input',
+        description: 'Used to enter short length text',
+        component: TextInput,
         props: {
-            label: 'Check me',
-            faramElementName: 'checkbox',
+            label: 'Name',
+            faramElementName: 'textInput',
         },
+        groupKey: 'Common',
     },
     {
-        key: 'colorInput',
-        title: 'Color input',
-        description: 'Color input lets user to select a color with a helper popup with different color modes.',
-        component: ColorInput,
+        key: 'searchInput',
+        title: 'Search Input',
+        description: 'Similar to Text Input but used for search.',
+        component: SearchInput,
         props: {
-            label: 'Select a color',
-            faramElementName: 'colorInput',
+            label: 'Search User',
+            faramElementName: 'searchInput',
+            showHintAndError: false,
         },
+        groupKey: 'Common',
     },
     {
-        key: 'dateFilter',
-        title: 'Date filter',
-        description: 'Date filter is used to select a range of date along with some predefined ranges.',
-        component: DateFilter,
+        key: 'textArea',
+        title: 'Text Area',
+        description: 'Used to enter long length text',
+        component: TextArea,
         props: {
-            label: 'Select a date range',
-            faramElementName: 'dateFilter',
+            label: 'Remarks',
+            faramElementName: 'textArea',
+            rows: 7,
         },
-    },
-    {
-        key: 'dateInput',
-        title: 'Date input',
-        description: 'Date input lets user to select a date from either manual entry or through a helper popup.',
-        component: DateInput,
-        props: {
-            label: 'Select a date',
-            faramElementName: 'dateInput',
-        },
-    },
-    {
-        key: 'datePicker',
-        title: 'Date picker',
-        description: 'Date picker',
-        component: DatePicker,
-        props: {
-            faramElementName: 'datePicker',
-        },
+        groupKey: 'Common',
     },
     {
         key: 'formattedTextArea',
-        title: 'Formatted text area',
-        description: 'Formatted text area',
+        title: 'Formatted Text Area',
+        description: 'Similar to Text Area but with an additional format button',
         component: FormattedTextArea,
         props: {
-            label: 'Enter text',
+            label: 'Remarks',
             faramElementName: 'formattedTextArea',
+            rows: 7,
         },
-    },
-    {
-        key: 'listSelection',
-        title: 'List selection',
-        description: 'List selection',
-        component: ListSelection,
-        props: {
-            label: 'Select option(s)',
-            faramElementName: 'listSelection',
-            options,
-        },
-    },
-    {
-        key: 'multiSelectInput',
-        title: 'Multi select input',
-        description: 'Multi select input',
-        component: MultiSelectInput,
-        props: {
-            label: 'Select option(s)',
-            faramElementName: 'multiSelectInput',
-            options,
-        },
+        groupKey: 'Common',
     },
     {
         key: 'numberInput',
-        title: 'Number input',
-        description: 'Number input',
+        title: 'Number Input',
+        description: 'Useful to enter number',
         component: NumberInput,
         props: {
-            label: 'Enter a number',
+            label: 'Age',
             faramElementName: 'numberInput',
         },
+        groupKey: 'Common',
+    },
+
+    // Date inputs
+    {
+        key: 'dateInput',
+        title: 'Date Input',
+        description: 'Used to select a date from either manual entry or through a popup.',
+        component: DateInput,
+        props: {
+            label: 'Published Date',
+            faramElementName: 'dateInput',
+        },
+        groupKey: 'Date',
+    },
+    {
+        key: 'dateFilter',
+        title: 'Date Filter',
+        description: 'Used to select a range of date along with some predefined ranges.',
+        component: DateFilter,
+        props: {
+            label: 'Date Range',
+            faramElementName: 'dateFilter',
+        },
+        groupKey: 'Date',
+    },
+    {
+        key: 'datePicker',
+        title: 'Date Picker',
+        description: 'Used to select date from calendar',
+        component: DatePicker,
+        props: {
+            label: 'Birthday',
+            faramElementName: 'datePicker',
+        },
+        groupKey: 'Date',
+    },
+
+    // Time inputs
+    {
+        key: 'timeInput',
+        title: 'Time Input',
+        description: 'Used to select time',
+        component: TimeInput,
+        props: {
+            label: 'Check-in time',
+            faramElementName: 'timeInput',
+        },
+        groupKey: 'Time',
+    },
+    {
+        key: 'timeFilter',
+        title: 'Time Filter',
+        description: 'Used to select exact time or a range of time',
+        component: TimeFilter,
+        props: {
+            label: 'Tea break',
+            faramElementName: 'timeFilter',
+        },
+        groupKey: 'Time',
+    },
+
+    // Small selection inputs
+    {
+        key: 'checkbox',
+        title: 'Checkbox',
+        description: 'Used to select/deselect an item',
+        component: Checkbox,
+        props: {
+            label: 'I agree with the terms and condition.',
+            faramElementName: 'checkbox',
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'listSelection',
+        title: 'List Selection',
+        description: 'Used to select one or more items from a set.',
+        component: ListSelection,
+        props: {
+            label: 'Vegetables',
+            faramElementName: 'listSelection',
+            options: vegetables.slice(0, 5),
+        },
+        groupKey: 'Selection',
     },
     {
         key: 'radioInput',
-        title: 'Radio input',
-        description: 'Radio input',
+        title: 'Radio Input',
+        description: 'Used to select one and only one item from a set.',
         component: RadioInput,
         props: {
             faramElementName: 'radioInput',
-            name: 'radioInput',
+            name: 'Fruit', // unique name
+            // label: 'Fruit',
+            options: fruits.slice(0, 5),
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'segmentInput',
+        title: 'Segment Input',
+        description: 'Similar to Radio Input but only visually different',
+        component: SegmentInput,
+        props: {
+            label: 'Fruit',
+            faramElementName: 'segmentInput',
+            options: fruits.slice(0, 5),
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'scaleInput',
+        title: 'Scale Input',
+        description: 'Used to select items depicted in color scale',
+        component: ScaleInput,
+        props: {
+            label: 'Severity',
+            faramElementName: 'scaleInput',
             options,
         },
+        groupKey: 'Selection',
+    },
+
+    // Large selection inputs
+    {
+        key: 'selectInput',
+        title: 'Select Input',
+        description: 'Used to select an item from list of items',
+        component: SelectInput,
+        props: {
+            label: 'Fruit',
+            faramElementName: 'selectInput',
+            options: fruits,
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'searchSelectInput',
+        title: 'Search Select Input',
+        description: 'Similar to Select Input but list is only populated after search',
+        component: SearchSelectInput,
+        props: {
+            label: 'Fruit',
+            faramElementName: 'searchSelectInput',
+            options: fruits,
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'multiSelectInput',
+        title: 'Multi Select Input',
+        description: 'Used to select one or more item from list of items',
+        component: MultiSelectInput,
+        props: {
+            label: 'Vegetables',
+            faramElementName: 'multiSelectInput',
+            options: vegetables,
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'searchMultiSelectInput',
+        title: 'Search multi select input',
+        description: 'Similar to Multi Select Input but list is only populated after search',
+        component: SearchMultiSelectInput,
+        props: {
+            label: 'Vegetables',
+            faramElementName: 'searchMultiSelectInput',
+            options: vegetables,
+        },
+        groupKey: 'Selection',
+    },
+    {
+        key: 'selectInputWithList',
+        title: 'Select input with list',
+        description: 'Similar to Multi Select Input and additionally, selected items are listed separately',
+        component: SelectInputWithList,
+        props: {
+            label: 'Vegetables',
+            faramElementName: 'selectInputWithList',
+            options: vegetables,
+        },
+        groupKey: 'Selection',
     },
     {
         key: 'rangeFilter',
         title: 'Range filter',
-        description: 'Range filter',
+        description: 'Used to select start and end of range',
         component: RangeFilter,
         props: {
-            label: 'Select option',
+            label: 'Range',
             faramElementName: 'rangeFilter',
             options,
         },
+        groupKey: 'Selection',
+    },
+
+    // Misc inputs
+    {
+        key: 'colorInput',
+        title: 'Color Input',
+        description: 'Used to select a color with a helper popup with different color modes.',
+        component: ColorInput,
+        props: {
+            label: 'Color',
+            faramElementName: 'colorInput',
+        },
+        groupKey: 'Misc',
     },
     {
         key: 'rawFileInput',
-        title: 'Raw file input',
-        description: 'Raw file input',
+        title: 'Raw File Input',
+        description: 'Used to upload file',
         component: RawFileInput,
         props: {
             faramElementName: 'rawFileInput',
             children: 'Select a file',
         },
+        groupKey: 'Misc',
     },
-    {
-        key: 'scaleInput',
-        title: 'Scale input',
-        description: 'Scale input',
-        component: ScaleInput,
-        props: {
-            label: 'Select an option',
-            faramElementName: 'scaleInput',
-            options,
-        },
-    },
-    {
-        key: 'searchInput',
-        title: 'Search input',
-        description: 'Search input',
-        component: SearchInput,
-        props: {
-            label: 'Search',
-            faramElementName: 'searchInput',
-            showHintAndError: false,
-        },
-    },
-    {
-        key: 'searchMultiSelectInput',
-        title: 'Search multi select input',
-        description: 'Search multi select input',
-        component: SearchMultiSelectInput,
-        props: {
-            label: 'Search',
-            faramElementName: 'searchMultiSelectInput',
-            options,
-        },
-    },
-    {
-        key: 'searchSelectInput',
-        title: 'Search select input',
-        description: 'Search select input',
-        component: SearchSelectInput,
-        props: {
-            label: 'Search',
-            faramElementName: 'searchSelectInput',
-            options,
-        },
-    },
-    {
-        key: 'segmentInput',
-        title: 'Segment input',
-        description: 'Segment input',
-        component: SegmentInput,
-        props: {
-            label: 'Select an option',
-            faramElementName: 'segmentInput',
-            options,
-        },
-    },
-    {
-        key: 'selectInput',
-        title: 'Select input',
-        description: 'Select input',
-        component: SelectInput,
-        props: {
-            label: 'Select an option',
-            faramElementName: 'selectInput',
-            options,
-        },
-    },
-    {
-        key: 'selectInputWithList',
-        title: 'Select input with list',
-        description: 'Select input with list',
-        component: SelectInputWithList,
-        props: {
-            label: 'Select option(s)',
-            faramElementName: 'selectInputWithList',
-            options,
-        },
-    },
-    {
-        key: 'textArea',
-        title: 'Textarea',
-        description: 'Textarea',
-        component: TextArea,
-        props: {
-            label: 'Enter text',
-            faramElementName: 'textArea',
-        },
-    },
-    {
-        key: 'textInput',
-        title: 'Text input',
-        description: 'Text input',
-        component: TextInput,
-        props: {
-            label: 'Enter text',
-            faramElementName: 'textInput',
-        },
-    },
-    {
-        key: 'timeFilter',
-        title: 'Time filter',
-        description: 'Time filter',
-        component: TimeFilter,
-        props: {
-            label: 'Select a duration',
-            faramElementName: 'timeFilter',
-        },
-    },
-    {
-        key: 'timeInput',
-        title: 'Time input',
-        description: 'Time input',
-        component: TimeInput,
-        props: {
-            label: 'Select a time',
-            faramElementName: 'timeInput',
-        },
-    },
+
 ];
 
 export default inputList;

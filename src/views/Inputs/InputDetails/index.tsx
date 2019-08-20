@@ -6,8 +6,8 @@ import styles from './styles.scss';
 interface Props {
     className?: string;
     component: React.ElementType;
-    title: string | React.ElementType;
-    description?: string | React.ElementType;
+    title: string | React.ReactNode;
+    description?: string | React.ReactNode;
     usage?: string | React.ElementType;
     componentProps: {};
 }
@@ -35,11 +35,9 @@ export default class InputDetails extends React.PureComponent<Props> {
                         </div>
                     </header>
                     <div className={styles.content}>
-                        <div className={styles.preview}>
-                            <Component
-                                {...componentProps}
-                            />
-                        </div>
+                        <Component
+                            {...componentProps}
+                        />
                         <div className={styles.usage}>
                             { usage }
                         </div>

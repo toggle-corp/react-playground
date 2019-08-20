@@ -3,6 +3,7 @@
 
     .left {
         display: flex;
+        align-items: flex-start;
         flex-direction: column;
         flex-grow: 1;
 
@@ -19,14 +20,9 @@
         }
 
         .content {
-            flex-grow: 1;
             padding: var(--spacing-medium);
+            width: var(--width-input);
             overflow: auto;
-
-            .preview {
-                border: var(--width-separator-thin) solid var(--color-separator-light);
-                padding: var(--spacing-extra-large);
-            }
         }
     }
 
