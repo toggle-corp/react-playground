@@ -46,7 +46,22 @@ export default class Inputs extends React.PureComponent<Props, State> {
         super(props);
 
         this.state = {
-            faramValues: {},
+            faramValues: {
+                textInput: 'Hari Prasad',
+                searchInput: 'Hari',
+                textArea: 'The epic, traditionally ascribed to the Rishi Valmiki, narrates the life of Rama, the legendary prince of the Kosala Kingdom.\n It follows his fourteen-year exile to the forest by his father King Dasharatha, on request of his step-mother Kaikeyi.',
+                formattedTextArea: 'The epic, traditionally ascribed\n to the Rishi Valmiki, narrates the life of Rama, the legendary prince of the Kosala Kingdom.\n\n It follows his fourteen-year\n exile to the forest by his father King Dasharatha, on request of his step-mother Kaikeyi.',
+                numberInput: 42,
+                listSelection: ['1', '3'],
+                radioInput: '3',
+                segmentInput: '3',
+                scaleInput: '3',
+                selectInput: '3',
+                searchSelectInput: '3',
+                multiSelectInput: ['1', '3'],
+                searchMultiSelectInput: ['1', '3'],
+                selectInputWithList: ['1', '3'],
+            },
         };
 
         this.faramSchema = {

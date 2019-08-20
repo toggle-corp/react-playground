@@ -44,11 +44,11 @@ interface Option {
 }
 
 const options: Option[] = [
-    { key: 'option1', label: 'Option 1', color: '#ef9a9a' },
-    { key: 'option2', label: 'Option 2', color: '#ef5350' },
-    { key: 'option3', label: 'Option 3', color: '#e53935' },
-    { key: 'option4', label: 'Option 4', color: '#c62828' },
-    { key: 'option5', label: 'Option 5', color: '#7f0000' },
+    { key: '1', label: 'Option 1', color: '#ef9a9a' },
+    { key: '2', label: 'Option 2', color: '#ef5350' },
+    { key: '3', label: 'Option 3', color: '#e53935' },
+    { key: '4', label: 'Option 4', color: '#c62828' },
+    { key: '5', label: 'Option 5', color: '#7f0000' },
 ];
 
 const fruits: Option[] = [
@@ -154,6 +154,28 @@ const inputList: InputElement[] = [
         },
         groupKey: 'Common',
     },
+    {
+        key: 'checkbox',
+        title: 'Checkbox',
+        description: 'Used to select/deselect an item',
+        component: Checkbox,
+        props: {
+            label: 'I agree with the terms and condition.',
+            faramElementName: 'checkbox',
+        },
+        groupKey: 'Common',
+    },
+    {
+        key: 'colorInput',
+        title: 'Color Input',
+        description: 'Used to select a color with a helper popup with different color modes.',
+        component: ColorInput,
+        props: {
+            label: 'Color',
+            faramElementName: 'colorInput',
+        },
+        groupKey: 'Common',
+    },
 
     // Date inputs
     {
@@ -214,27 +236,17 @@ const inputList: InputElement[] = [
         groupKey: 'Time',
     },
 
-    // Small selection inputs
+
+    // Single select
     {
-        key: 'checkbox',
-        title: 'Checkbox',
-        description: 'Used to select/deselect an item',
-        component: Checkbox,
+        key: 'scaleInput',
+        title: 'Scale Input',
+        description: 'Used to select items depicted in color scale',
+        component: ScaleInput,
         props: {
-            label: 'I agree with the terms and condition.',
-            faramElementName: 'checkbox',
-        },
-        groupKey: 'Selection',
-    },
-    {
-        key: 'listSelection',
-        title: 'List Selection',
-        description: 'Used to select one or more items from a set.',
-        component: ListSelection,
-        props: {
-            label: 'Vegetables',
-            faramElementName: 'listSelection',
-            options: vegetables.slice(0, 5),
+            label: 'Severity',
+            faramElementName: 'scaleInput',
+            options,
         },
         groupKey: 'Selection',
     },
@@ -264,20 +276,6 @@ const inputList: InputElement[] = [
         groupKey: 'Selection',
     },
     {
-        key: 'scaleInput',
-        title: 'Scale Input',
-        description: 'Used to select items depicted in color scale',
-        component: ScaleInput,
-        props: {
-            label: 'Severity',
-            faramElementName: 'scaleInput',
-            options,
-        },
-        groupKey: 'Selection',
-    },
-
-    // Large selection inputs
-    {
         key: 'selectInput',
         title: 'Select Input',
         description: 'Used to select an item from list of items',
@@ -301,6 +299,20 @@ const inputList: InputElement[] = [
         },
         groupKey: 'Selection',
     },
+
+    // Multi select
+    {
+        key: 'listSelection',
+        title: 'List Selection',
+        description: 'Used to select one or more items from a set.',
+        component: ListSelection,
+        props: {
+            label: 'Vegetables',
+            faramElementName: 'listSelection',
+            options: vegetables.slice(0, 5),
+        },
+        groupKey: 'Multi Selection',
+    },
     {
         key: 'multiSelectInput',
         title: 'Multi Select Input',
@@ -311,7 +323,7 @@ const inputList: InputElement[] = [
             faramElementName: 'multiSelectInput',
             options: vegetables,
         },
-        groupKey: 'Selection',
+        groupKey: 'Multi Selection',
     },
     {
         key: 'searchMultiSelectInput',
@@ -323,7 +335,7 @@ const inputList: InputElement[] = [
             faramElementName: 'searchMultiSelectInput',
             options: vegetables,
         },
-        groupKey: 'Selection',
+        groupKey: 'Multi Selection',
     },
     {
         key: 'selectInputWithList',
@@ -335,8 +347,10 @@ const inputList: InputElement[] = [
             faramElementName: 'selectInputWithList',
             options: vegetables,
         },
-        groupKey: 'Selection',
+        groupKey: 'Multi Selection',
     },
+
+    // Misc inputs
     {
         key: 'rangeFilter',
         title: 'Range filter',
@@ -347,21 +361,9 @@ const inputList: InputElement[] = [
             faramElementName: 'rangeFilter',
             options,
         },
-        groupKey: 'Selection',
-    },
-
-    // Misc inputs
-    {
-        key: 'colorInput',
-        title: 'Color Input',
-        description: 'Used to select a color with a helper popup with different color modes.',
-        component: ColorInput,
-        props: {
-            label: 'Color',
-            faramElementName: 'colorInput',
-        },
         groupKey: 'Misc',
     },
+
     {
         key: 'rawFileInput',
         title: 'Raw File Input',
