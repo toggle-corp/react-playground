@@ -78,7 +78,7 @@ const LoadingPage = ({ error, retry }: LoadOptions) => {
 };
 
 const routes = routeSettings.map(({ load, ...settings }) => {
-    const Component = errorBound<typeof settings>(ErrorInPage)(
+    const Component = errorBound<typeof settings & { className: string }>(ErrorInPage)(
         helmetify(
             Loadable({
                 loader: load,
@@ -89,6 +89,7 @@ const routes = routeSettings.map(({ load, ...settings }) => {
 
     return (
         <Component
+            className={styles.component}
             key={settings.name}
             {...settings}
         />

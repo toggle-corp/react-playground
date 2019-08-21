@@ -1,7 +1,13 @@
-.dashboard {
+.inputs {
     display: flex;
     flex-direction: column;
     overflow: auto;
+
+    .header {
+        flex-shrink: 0;
+        border-bottom: var(--width-separator-thin) solid var(--color-separator);
+        padding: var(--spacing-medium);
+    }
 
     .content {
         display: flex;
@@ -9,25 +15,20 @@
         overflow: auto;
 
         .tabs {
-            flex-basis: var(--width-left-pane);
+            flex-grow: 0;
             flex-shrink: 0;
             border-right: var(--width-separator-thin) solid var(--color-separator);
-            background: var(--color-text-on-dark);
+            width: auto;
             overflow: auto;
-
-            a {
-                opacity: 1;
-            }
         }
-        
-        .container {
-            display: flex;
-            flex-grow: 1;
-            overflow: auto;
 
-            .viz {
+        .faram {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .input-details {
                 flex-grow: 1;
-                overflow: auto;
             }
         }
     }

@@ -1,19 +1,11 @@
 .navbar {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    border-bottom: var(--width-separator-thin) solid var(--color-separator);
     background-color: var(--color-foreground);
+    overflow: auto;
 
     .menu {
         display: flex;
         flex-direction: row;
-        overflow-y: auto;
-
-        .menu-items {
-            display: flex;
-            flex-direction: row;
-            flex-grow: 1;
-            margin-right: var(--spacing-medium);
-        }
+        overflow: auto;
     }
 }

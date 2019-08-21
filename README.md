@@ -1,25 +1,29 @@
 # React-Playground
 
-A showcase of react components from [react-store][react-store].
+A showcase of components from [react-store][react-store].
 
-## Related modules
-- [react-store][react-store]
+## Getting Started
 
-## Local setup
-- clone the repository
+Clone the repository:
 
-    git clone https://github.com/toggle-corp/react-playground
-- install dependencies
+```bash
+git clone https://github.com/toggle-corp/react-playground
+```
 
-    yarn install
-- create a vendor directory under src folder and clone [react-store][react-store]
+Install dependencies:
 
-        cd src
-        mkdir vendor
-        cd vendor
-        git clone https://github.com/toggle-corp/react-store
-- start project locally using `yarn start`
-- or build a local copy of the module with `yarn run build`
+```bash
+yarn install
+```
 
+Create a vendor directory under src folder and clone react-store:
 
-[react-store]: https://github.com/toggle-corp/react-stor# 
+```bash
+git clone https://github.com/toggle-corp/react-store src/vendor/react-store
+```
+
+Start project locally using:
+
+```bash
+yarn start
+```

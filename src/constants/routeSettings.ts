@@ -32,10 +32,17 @@ const routeSettings: SomeRoute[] = [
         navbar: true,
     },
     {
-        path: '/Viewer',
+        path: '/viewer/',
         name: 'Viewer',
         title: 'Viewer',
         load: () => import('../views/Viewer'),
+        navbar: true,
+    },
+    {
+        path: '/inputs/',
+        name: 'Inputs',
+        title: 'Inputs',
+        load: () => import('../views/Inputs'),
         navbar: true,
     },
     {
