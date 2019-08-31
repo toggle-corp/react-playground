@@ -10,6 +10,7 @@ module.exports = {
     },
     'plugins': [
         'react',
+        'react-hooks',
         'import',
         'css-modules',
         '@typescript-eslint',
