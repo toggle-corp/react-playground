@@ -32,6 +32,7 @@ import VerticalBarChart from '#rscz/VerticalBarChart';
 import WordCloud from '#rscz/WordCloud';
 import ZoomableTreeMap from '#rscz/ZoomableTreeMap';
 import Histogram from '#rscz/Histogram';
+import GaugeChart from '#rscz/GaugeChart';
 
 import barData from '#resources/data/barData.js';
 import orgChartData from '#resources/data/orgChartData.js';
@@ -86,6 +87,7 @@ class Visualization extends Component {
             verticalBarChart: 'Vertical Bar Chart',
             wordCloud: 'Word Cloud',
             zoomableTreemap: 'Zoomable Treemap',
+            gaugeChart: 'Gauge Chart',
         };
 
         this.views = {
@@ -409,6 +411,18 @@ class Visualization extends Component {
                     <Histogram
                         className={styles.viz}
                         data={histogramData}
+                    />
+                ),
+            },
+            gaugeChart: {
+                wrapContainer: true,
+                component: () => (
+                    <GaugeChart
+                        className={styles.viz}
+                        noOfSections={5}
+                        minValue={0}
+                        maxValue={100}
+                        currentValue={50}
                     />
                 ),
             },
