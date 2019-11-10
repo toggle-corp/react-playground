@@ -6,12 +6,46 @@ import {
 
 import Faram from '@togglecorp/faram';
 
+// import List from '../../vendor/react-store/v2/View/List';
 import VerticalTabs from '#rscv/VerticalTabs';
 import MultiViewContainer from '#rscv/MultiViewContainer';
 
 import inputList from './inputList';
 import InputDetails from './InputDetails';
 import styles from './styles.scss';
+
+/*
+interface Data {
+    key: number;
+    groupKey: string;
+    name: string;
+}
+
+const data: Data[] = [
+    { key: 1, groupKey: 'Person', name: 'Hari' },
+    { key: 3, groupKey: 'Animal', name: 'Elephant' },
+    { key: 2, groupKey: 'Person', name: 'Shyam' },
+    { key: 4, groupKey: 'Animal', name: 'Jungle' },
+];
+
+const ListItem = ({ type, name }: { type: string; name: string }) => (
+    <div>
+        {`${type} / ${name}`}
+    </div>
+);
+
+const GroupListItem = ({ groupName }: { groupName: string }) => (
+    <div>
+        <b>{groupName}</b>
+    </div>
+);
+
+const keySelector = (datum: Data) => datum.key;
+const rendererParams = (key: number, { groupKey, name }: Data) => ({ type: groupKey, name });
+
+const groupKeySelector = (datum: Data) => datum.groupKey;
+const groupRendererParams = (groupName: string) => ({ groupName });
+*/
 
 interface Props {
     className?: string;
@@ -121,6 +155,20 @@ export default class Inputs extends React.PureComponent<Props, State> {
 
         return (
             <div className={_cs(className, styles.inputs)}>
+                {/*
+                <List
+                    keySelector={keySelector}
+                    data={data}
+
+                    rendererParams={rendererParams}
+                    renderer={ListItem}
+
+                    grouped
+                    groupKeySelector={groupKeySelector}
+                    groupRenderer={GroupListItem}
+                    groupRendererParams={groupRendererParams}
+                />
+                */}
                 <header className={styles.header}>
                     <h2 className={styles.heading}>
                         Input components

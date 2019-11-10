@@ -1,5 +1,7 @@
 import React from 'react';
+import { FaramInputElement } from '@togglecorp/faram';
 
+import NewRawSelectInput from '../../vendor/react-store/v2/Input/SelectInput';
 import Checkbox from '#rsci/Checkbox';
 import ColorInput from '#rsci/ColorInput';
 import DateFilter from '#rsci/DateFilter';
@@ -23,6 +25,8 @@ import TextArea from '#rsci/TextArea';
 import TextInput from '#rsci/TextInput';
 import TimeFilter from '#rsci/TimeFilter';
 import TimeInput from '#rsci/TimeInput';
+
+const NewSelectInput = FaramInputElement(NewRawSelectInput);
 
 export interface InputElement {
     key: string;
@@ -95,6 +99,35 @@ const vegetables: Option[] = [
 ];
 
 const inputList: InputElement[] = [
+    // Test
+    {
+        key: 'newSearchSelectInput',
+        title: 'New SearchSelect Input',
+        description: 'New Version of SearchSelect Input',
+        component: NewSelectInput,
+        props: {
+            label: 'Fruit',
+            faramElementName: 'selectInput',
+            options: fruits,
+            autoFocus: true,
+            maxDisplayOptions: 3,
+        },
+        groupKey: 'Alpha',
+    },
+    {
+        key: 'newSelectInput',
+        title: 'New Select Input',
+        description: 'New Version of Select Input',
+        component: NewSelectInput,
+        props: {
+            label: 'Fruit',
+            faramElementName: 'selectInput',
+            options: fruits,
+            autoFocus: true,
+        },
+        groupKey: 'Alpha',
+    },
+
     // Text inputs
     {
         key: 'textInput',
