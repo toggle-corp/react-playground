@@ -33,6 +33,7 @@ import WordCloud from '#rscz/WordCloud';
 import ZoomableTreeMap from '#rscz/ZoomableTreeMap';
 import Histogram from '#rscz/Histogram';
 import GaugeChart from '#rscz/GaugeChart';
+import GroupedBarChart from '#rscz/GroupedBarChart';
 
 import barData from '#resources/data/barData.js';
 import orgChartData from '#resources/data/orgChartData.js';
@@ -47,6 +48,7 @@ import sankeyData from '#resources/data/sankeyData';
 import stackedData from '#resources/data/stackedData';
 import streamData from '#resources/data/streamData';
 import words from '#resources/data/wordCloudData';
+import groupedData from '#resources/data/groupedData';
 
 import styles from './styles.scss';
 
@@ -88,6 +90,7 @@ class Visualization extends Component {
             wordCloud: 'Word Cloud',
             zoomableTreemap: 'Zoomable Treemap',
             gaugeChart: 'Gauge Chart',
+            groupedBarChart: 'Grouped Bar Chart',
         };
 
         this.views = {
@@ -423,6 +426,16 @@ class Visualization extends Component {
                         minValue={0}
                         maxValue={100}
                         currentValue={50}
+                    />
+                ),
+            },
+            groupedBarChart: {
+                wrapContainer: true,
+                component: () => (
+                    <GroupedBarChart
+                        className={styles.viz}
+                        data={groupedData}
+                        groupSelector={d => d.state}
                     />
                 ),
             },
