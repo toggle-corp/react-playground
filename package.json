@@ -23,7 +23,9 @@
         "lint": "eslint ./src --rule 'import/no-unresolved: 0'",
         "test:coverage": "jest --coverage",
         "predeploy": "yarn run build",
-        "deploy": "gh-pages -d build"
+        "deploy": "gh-pages -d build",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
     "devDependencies": {
         "@babel/core": "^7.4.5",
@@ -41,6 +43,10 @@
         "@babel/preset-react": "^7.0.0-beta.46",
         "@babel/preset-typescript": "^7.3.3",
         "@babel/runtime": "^7.0.0-beta.46",
+        "@storybook/addon-actions": "^5.2.1",
+        "@storybook/addon-links": "^5.2.1",
+        "@storybook/addons": "^5.2.1",
+        "@storybook/react": "^5.2.1",
         "@types/file-saver": "^2.0.0",
         "@types/hoist-non-react-statics": "^3.3.0",
         "@types/memoize-one": "^4.1.1",
@@ -201,5 +207,5 @@
             "[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$",
             "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
         ]
-    },
+    }
 }
