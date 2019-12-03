@@ -14,6 +14,7 @@ const dotenv = require('dotenv').config({
 const appBase = process.cwd();
 const eslintFile = path.resolve(appBase, '.eslintrc-loader.js');
 const appSrc = path.resolve(appBase, 'src/');
+const appStories = path.resolve(appBase, 'stories/');
 const appDist = path.resolve(appBase, 'build/');
 const appIndexJs = path.resolve(appBase, 'src/index.tsx');
 const appIndexHtml = path.resolve(appBase, 'public/index.html');
@@ -33,7 +34,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx|ts|tsx)$/,
-                include: appSrc,
+                include: [appSrc, appStories],
                 use: [
                     'cache-loader',
                     'babel-loader',
@@ -60,8 +61,25 @@ module.exports = {
                 ],
             },
             {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: require.resolve('css-loader'),
+                        options: {
+                            importLoaders: 1,
+                            modules: {
+                                localIdentName: '[name]_[local]_[hash:base64]',
+                            },
+                            localsConvention: 'camelCase',
+                            sourceMap: true,
+                        },
+                    },
+                ],
+            },
+            {
                 test: /\.scss$/,
-                include: appSrc,
+                include: [appSrc, appStories],
                 use: [
                     'style-loader',
                     {

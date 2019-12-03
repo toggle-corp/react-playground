@@ -116,6 +116,7 @@
         "@togglecorp/fujs": "^1.6.1",
         "@togglecorp/ravl": "^1.2.2",
         "@togglecorp/react-rest-request": "^2.4.3",
+        "@types/mapbox-gl": "^1.5.2",
         "core-js": "3",
         "d3-area-label": "^1.4.0",
         "d3-array": "^2.2.0",
