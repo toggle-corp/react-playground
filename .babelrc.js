@@ -51,6 +51,7 @@ module.exports = {
                     '#store': './src/store',
                     '#ts': './src/ts',
                     '#utils': './src/utils',
+                    '#re-map': './src/vendor/re-map',
                     '#rsca': './src/vendor/react-store/components/Action',
                     '#rscg': './src/vendor/react-store/components/General',
                     '#rsci': './src/vendor/react-store/components/Input',

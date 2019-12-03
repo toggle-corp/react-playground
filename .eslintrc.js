@@ -33,6 +33,7 @@ module.exports = {
                     '#store': './src/store',
                     '#ts': './src/ts',
                     '#utils': './src/utils',
+                    '#re-map': './src/vendor/re-map',
                     '#rsca': './src/vendor/react-store/components/Action',
                     '#rscg': './src/vendor/react-store/components/General',
                     '#rsci': './src/vendor/react-store/components/Input',
@@ -104,10 +105,12 @@ module.exports = {
         '@typescript-eslint/no-empty-interface': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
 
-
         'react/no-unused-state': 'warn',
         'react/default-props-match-prop-types': ['warn', {
             'allowRequiredDefaults': true,
         }],
+
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
 };
