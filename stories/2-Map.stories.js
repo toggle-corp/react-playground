@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 
 import Map from '#re-map';
 import MapContainer from '#re-map/MapContainer';
 import MapBounds from '#re-map/MapBounds';
 import MapSource from '#re-map/MapSource';
 import MapLayer from '#re-map/MapSource/MapLayer';
+import MapState from '#re-map/MapSource/MapState';
 
 import styles from './styles.scss';
 
@@ -21,8 +22,25 @@ const mapOptions = {
     ],
 };
 
-// FIXME: problem with control visibility
-export const simpleMap = () => (
+const hoverAttributes = [
+    {
+        id: 4,
+        value: true,
+    },
+];
+
+const selectedAttributes = [
+    {
+        id: 1,
+        value: true,
+    },
+    {
+        id: 7,
+        value: true,
+    },
+];
+
+export const VectorLayersMap = () => (
     <Map
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
         mapOptions={mapOptions}
@@ -79,6 +97,247 @@ export const simpleMap = () => (
         />
     </Map>
 );
-simpleMap.story = {
-    name: 'simple map',
+VectorLayersMap.story = {
+    name: 'With vector layers',
+};
+
+export const MapStatesMap = () => (
+    <Map
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        mapOptions={mapOptions}
+        scaleControlShown
+        navControlShown
+    >
+        <MapBounds
+            bounds={mapOptions.bounds}
+            padding={50}
+        />
+        <MapSource
+            sourceKey="nepal"
+            sourceOptions={{
+                type: 'vector',
+                url: 'mapbox://adityakhatri.colcm1cq',
+            }}
+        >
+            <MapLayer
+                layerKey="province-fill"
+                layerOptions={{
+                    'source-layer': 'provincegeo',
+                    type: 'fill',
+                    paint: {
+                        'fill-color': 'green',
+                        'fill-opacity': ['case',
+                            ['boolean', ['feature-state', 'hover'], false],
+                            0.5,
+                            0,
+                        ],
+                    },
+                }}
+            />
+            <MapLayer
+                layerKey="province-line"
+                layerOptions={{
+                    'source-layer': 'provincegeo',
+                    type: 'line',
+                    paint: {
+                        'line-color': 'blue',
+
+                        'line-width': ['case',
+                            ['boolean', ['feature-state', 'selected'], false],
+                            5,
+                            1,
+                        ],
+                    },
+                }}
+            />
+            <MapState
+                sourceLayer="provincegeo"
+                attributes={hoverAttributes}
+                attributeKey="hover"
+            />
+            <MapState
+                sourceLayer="provincegeo"
+                attributes={selectedAttributes}
+                attributeKey="selected"
+            />
+        </MapSource>
+        <MapContainer
+            className={styles.map}
+        />
+    </Map>
+);
+MapStatesMap.story = {
+    name: 'With map states',
+};
+
+export const ClickableMap = () => (
+    <Map
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        mapOptions={mapOptions}
+        scaleControlShown
+        navControlShown
+    >
+        <MapBounds
+            bounds={mapOptions.bounds}
+            padding={50}
+        />
+        <MapSource
+            sourceKey="nepal"
+            sourceOptions={{
+                type: 'vector',
+                url: 'mapbox://adityakhatri.colcm1cq',
+            }}
+        >
+            <MapLayer
+                onClick={(feature) => {
+                    console.warn('Click district fill', feature);
+                }}
+                layerKey="district-fill"
+                layerOptions={{
+                    'source-layer': 'districtgeo',
+                    type: 'fill',
+                    paint: {
+                        'fill-color': 'red',
+                        'fill-opacity': 0.5,
+                    },
+                }}
+            />
+            <MapLayer
+                onClick={(feature) => {
+                    console.warn('Click province fill', feature);
+                    // NOTE: block propagation
+                    return true;
+                }}
+                layerKey="province-fill"
+                layerOptions={{
+                    'source-layer': 'provincegeo',
+                    type: 'fill',
+                    paint: {
+                        'fill-color': 'green',
+                        'fill-opacity': 0.5,
+                    },
+                    filter: [
+                        '==',
+                        'title',
+                        'Province 5',
+                    ],
+                }}
+            />
+        </MapSource>
+        <MapContainer
+            className={styles.map}
+        />
+    </Map>
+);
+ClickableMap.story = {
+    name: 'With clickable feature map',
+};
+
+export const HoverableMap = () => {
+    const [districtHoverId, setDistrictHoverId] = useState(undefined);
+    const [provinceHoverId, setProvinceHoverId] = useState(undefined);
+
+    const provinceHovers = useMemo(
+        () => {
+            if (provinceHoverId === undefined) {
+                return [];
+            }
+            return [{ id: provinceHoverId, value: true }];
+        },
+        [provinceHoverId],
+    );
+    const districtHovers = useMemo(
+        () => {
+            if (districtHoverId === undefined) {
+                return [];
+            }
+            return [{ id: districtHoverId, value: true }];
+        },
+        [districtHoverId],
+    );
+
+    return (
+        <Map
+            mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+            mapOptions={mapOptions}
+            scaleControlShown
+            navControlShown
+        >
+            <MapBounds
+                bounds={mapOptions.bounds}
+                padding={50}
+            />
+            <MapSource
+                sourceKey="nepal"
+                sourceOptions={{
+                    type: 'vector',
+                    url: 'mapbox://adityakhatri.colcm1cq',
+                }}
+            >
+                <MapLayer
+                    onMouseEnter={(feature) => {
+                        setDistrictHoverId(feature.id);
+                    }}
+                    onMouseLeave={() => {
+                        setDistrictHoverId(undefined);
+                    }}
+                    layerKey="district-fill"
+                    layerOptions={{
+                        'source-layer': 'districtgeo',
+                        type: 'fill',
+                        paint: {
+                            'fill-color': 'red',
+                            'fill-opacity': ['case',
+                                ['boolean', ['feature-state', 'hover'], false],
+                                0.5,
+                                0.2,
+                            ],
+                        },
+                    }}
+                />
+                <MapLayer
+                    onMouseEnter={(feature) => {
+                        setProvinceHoverId(feature.id);
+                    }}
+                    onMouseLeave={() => {
+                        setProvinceHoverId(undefined);
+                    }}
+                    layerKey="province-fill"
+                    layerOptions={{
+                        'source-layer': 'provincegeo',
+                        type: 'fill',
+                        paint: {
+                            'fill-color': 'green',
+                            'fill-opacity': ['case',
+                                ['boolean', ['feature-state', 'hover'], false],
+                                0.5,
+                                0.2,
+                            ],
+                        },
+                        filter: [
+                            '==',
+                            'title',
+                            'Province 5',
+                        ],
+                    }}
+                />
+                <MapState
+                    sourceLayer="provincegeo"
+                    attributes={provinceHovers}
+                    attributeKey="hover"
+                />
+                <MapState
+                    sourceLayer="districtgeo"
+                    attributes={districtHovers}
+                    attributeKey="hover"
+                />
+            </MapSource>
+            <MapContainer
+                className={styles.map}
+            />
+        </Map>
+    );
+};
+HoverableMap.story = {
+    name: 'With hoverable feature map',
 };
