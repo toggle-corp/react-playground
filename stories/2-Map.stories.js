@@ -6,6 +6,7 @@ import MapBounds from '#re-map/MapBounds';
 import MapSource from '#re-map/MapSource';
 import MapLayer from '#re-map/MapSource/MapLayer';
 import MapState from '#re-map/MapSource/MapState';
+import MapTooltip from '#re-map/MapTooltip';
 
 import styles from './styles.scss';
 
@@ -340,4 +341,55 @@ export const HoverableMap = () => {
 };
 HoverableMap.story = {
     name: 'With hoverable feature map',
+};
+
+export const TooltipMap = () => (
+    <Map
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        mapOptions={mapOptions}
+        scaleControlShown
+        navControlShown
+    >
+        <MapBounds
+            bounds={mapOptions.bounds}
+            padding={50}
+        />
+        <MapSource
+            sourceKey="nepal"
+            sourceOptions={{
+                type: 'vector',
+                url: 'mapbox://adityakhatri.colcm1cq',
+            }}
+        >
+            <MapLayer
+                layerKey="province"
+                layerOptions={{
+                    'source-layer': 'provincegeo',
+                    type: 'line',
+                    paint: {
+                        'line-color': '#ff0000',
+                        'line-width': 3,
+                    },
+                }}
+            />
+        </MapSource>
+        <MapTooltip
+            coordinates={mapOptions.center}
+            tooltipOptions={{
+                closeOnClick: false,
+                closeButton: false,
+            }}
+        >
+            <>
+                <h1> Example </h1>
+                <p> Tooltips are great to show information over map and marker points. </p>
+            </>
+        </MapTooltip>
+        <MapContainer
+            className={styles.map}
+        />
+    </Map>
+);
+TooltipMap.story = {
+    name: 'With tooltip map',
 };
