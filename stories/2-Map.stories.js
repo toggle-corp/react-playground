@@ -7,6 +7,7 @@ import MapSource from '#re-map/MapSource';
 import MapLayer from '#re-map/MapSource/MapLayer';
 import MapState from '#re-map/MapSource/MapState';
 import MapTooltip from '#re-map/MapTooltip';
+import { getLayerName } from '#re-map/utils';
 
 import styles from './styles.scss';
 
@@ -100,6 +101,68 @@ export const VectorLayersMap = () => (
 );
 VectorLayersMap.story = {
     name: 'With vector layers',
+};
+
+export const VectorLayersOrderingMap = () => (
+    <Map
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        mapOptions={mapOptions}
+        scaleControlShown
+        navControlShown
+    >
+        <MapBounds
+            bounds={mapOptions.bounds}
+            padding={50}
+        />
+        <MapSource
+            sourceKey="nepal"
+            sourceOptions={{
+                type: 'vector',
+                url: 'mapbox://adityakhatri.colcm1cq',
+            }}
+        >
+            <MapLayer
+                layerKey="municipality"
+                layerOptions={{
+                    'source-layer': 'municipalitygeo',
+                    type: 'line',
+                    paint: {
+                        'line-color': '#00ff00',
+                        'line-width': 0.5,
+                    },
+                }}
+            />
+            <MapLayer
+                layerKey="district"
+                beneath={getLayerName('nepal', 'municipality')}
+                layerOptions={{
+                    'source-layer': 'districtgeo',
+                    type: 'line',
+                    paint: {
+                        'line-color': '#0000ff',
+                        'line-width': 2,
+                    },
+                }}
+            />
+            <MapLayer
+                layerKey="province"
+                beneath={getLayerName('nepal', 'district')}
+                layerOptions={{
+                    'source-layer': 'provincegeo',
+                    type: 'fill',
+                    paint: {
+                        'fill-color': '#ff0000',
+                    },
+                }}
+            />
+        </MapSource>
+        <MapContainer
+            className={styles.map}
+        />
+    </Map>
+);
+VectorLayersOrderingMap.story = {
+    name: 'With vector layers (ordered)',
 };
 
 export const MapStatesMap = () => (
