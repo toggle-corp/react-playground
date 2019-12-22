@@ -70,105 +70,6 @@ const geoJsonCircleOptions = {
     filter: ['==', '$type', 'Point'],
 };
 
-export const LayerDrawMap = () => {
-    const [mode, setMode] = useState('simple_select');
-
-    const [editMode, setEditMode] = useState(false);
-    const [geoJsons, setGeoJsons] = useState([]);
-
-    const handleCreate = useCallback(
-        (features) => {
-            const newJsons = [...geoJsons, ...features];
-            setGeoJsons(newJsons);
-        },
-        [geoJsons],
-    );
-
-    const handleDelete = useCallback(
-        (features) => {
-            const copy = [...geoJsons];
-            features.forEach((feature) => {
-                const index = geoJsons.findIndex(geoJson => geoJson.id === feature.id);
-                copy.splice(index, 1);
-            });
-            setGeoJsons(copy);
-        },
-        [geoJsons],
-    );
-
-    const handleUpdate = useCallback(
-        (features) => {
-            const copy = [...geoJsons];
-            features.forEach((feature) => {
-                const index = geoJsons.findIndex(geoJson => geoJson.id === feature.id);
-                copy[index] = feature;
-            });
-            setGeoJsons(copy);
-        },
-        [geoJsons],
-    );
-
-    return (
-        <Map
-            mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
-            mapOptions={mapOptions}
-            scaleControlShown
-            navControlShown
-        >
-            <MapContainer
-                className={styles.map}
-            />
-            <MapBounds
-                bounds={mapOptions.bounds}
-                padding={50}
-            />
-            {editMode && (
-                <MapShapeEditor
-                    onCreate={handleCreate}
-                    onDelete={handleDelete}
-                    onUpdate={handleUpdate}
-                    onModeChange={setMode}
-
-                    geoJsons={geoJsons}
-                />
-            )}
-            {!editMode && geoJsons.map(geoJson => (
-                <MapSource
-                    key={geoJson.id}
-                    sourceKey={geoJson.id}
-                    sourceOptions={sourceOptions}
-                    geoJson={geoJson}
-                >
-                    <MapLayer
-                        layerKey="fill"
-                        layerOptions={geoJsonFillOptions}
-                    />
-                    <MapLayer
-                        layerKey="circle"
-                        layerOptions={geoJsonCircleOptions}
-                    />
-                </MapSource>
-            ))}
-            <Button
-                onClick={() => {
-                    setEditMode(!editMode);
-                }}
-            >
-                {`Currently editing: ${editMode}`}
-            </Button>
-            <div>
-                {`Mode: ${mode}`}
-            </div>
-            <div>
-                {`Total features: ${geoJsons.length}`}
-            </div>
-        </Map>
-    );
-};
-LayerDrawMap.story = {
-    name: 'With layer draw',
-};
-
 export const VectorLayersMap = () => (
     <Map
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
@@ -290,6 +191,156 @@ export const VectorLayersOrderingMap = () => (
 );
 VectorLayersOrderingMap.story = {
     name: 'With vector layers (ordered)',
+};
+
+export const LayerDrawMap = () => {
+    const [mode, setMode] = useState('simple_select');
+
+    const [editMode, setEditMode] = useState(false);
+    const [geoJsons, setGeoJsons] = useState([]);
+
+    const handleCreate = useCallback(
+        (features) => {
+            const newJsons = [...geoJsons, ...features];
+            setGeoJsons(newJsons);
+        },
+        [geoJsons],
+    );
+
+    const handleDelete = useCallback(
+        (features) => {
+            const copy = [...geoJsons];
+            features.forEach((feature) => {
+                const index = geoJsons.findIndex(geoJson => geoJson.id === feature.id);
+                copy.splice(index, 1);
+            });
+            setGeoJsons(copy);
+        },
+        [geoJsons],
+    );
+
+    const handleUpdate = useCallback(
+        (features) => {
+            const copy = [...geoJsons];
+            features.forEach((feature) => {
+                const index = geoJsons.findIndex(geoJson => geoJson.id === feature.id);
+                copy[index] = feature;
+            });
+            setGeoJsons(copy);
+        },
+        [geoJsons],
+    );
+
+    return (
+        <Map
+            mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+            mapOptions={mapOptions}
+            scaleControlShown
+            navControlShown
+        >
+            <MapContainer
+                className={styles.map}
+            />
+            <MapBounds
+                bounds={mapOptions.bounds}
+                padding={50}
+            />
+            {editMode && (
+                <MapShapeEditor
+                    onCreate={handleCreate}
+                    onDelete={handleDelete}
+                    onUpdate={handleUpdate}
+                    onModeChange={setMode}
+
+                    geoJsons={geoJsons}
+                />
+            )}
+            {!editMode && geoJsons.map(geoJson => (
+                <MapSource
+                    key={geoJson.id}
+                    sourceKey={geoJson.id}
+                    sourceOptions={sourceOptions}
+                    geoJson={geoJson}
+                >
+                    <MapLayer
+                        layerKey="fill"
+                        layerOptions={geoJsonFillOptions}
+                    />
+                    <MapLayer
+                        layerKey="circle"
+                        layerOptions={geoJsonCircleOptions}
+                    />
+                </MapSource>
+            ))}
+            <Button
+                onClick={() => {
+                    setEditMode(!editMode);
+                }}
+            >
+                {`Currently editing: ${editMode}`}
+            </Button>
+            <div>
+                {`Mode: ${mode}`}
+            </div>
+            <div>
+                {`Total features: ${geoJsons.length}`}
+            </div>
+        </Map>
+    );
+};
+LayerDrawMap.story = {
+    name: 'With layer draw',
+};
+
+export const TooltipMap = () => (
+    <Map
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        mapOptions={mapOptions}
+        scaleControlShown
+        navControlShown
+    >
+        <MapBounds
+            bounds={mapOptions.bounds}
+            padding={50}
+        />
+        <MapSource
+            sourceKey="nepal"
+            sourceOptions={{
+                type: 'vector',
+                url: 'mapbox://adityakhatri.colcm1cq',
+            }}
+        >
+            <MapLayer
+                layerKey="province"
+                layerOptions={{
+                    'source-layer': 'provincegeo',
+                    type: 'line',
+                    paint: {
+                        'line-color': '#ff0000',
+                        'line-width': 3,
+                    },
+                }}
+            />
+        </MapSource>
+        <MapTooltip
+            coordinates={mapOptions.center}
+            tooltipOptions={{
+                closeOnClick: false,
+                closeButton: false,
+            }}
+        >
+            <>
+                <h1> Example </h1>
+                <p> Tooltips are great to show information over map and marker points. </p>
+            </>
+        </MapTooltip>
+        <MapContainer
+            className={styles.map}
+        />
+    </Map>
+);
+TooltipMap.story = {
+    name: 'With tooltip map',
 };
 
 export const MapStatesMap = () => (
@@ -533,53 +584,102 @@ HoverableMap.story = {
     name: 'With hoverable feature map',
 };
 
-export const TooltipMap = () => (
-    <Map
-        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
-        mapOptions={mapOptions}
-        scaleControlShown
-        navControlShown
-    >
-        <MapBounds
-            bounds={mapOptions.bounds}
-            padding={50}
-        />
-        <MapSource
-            sourceKey="nepal"
-            sourceOptions={{
-                type: 'vector',
-                url: 'mapbox://adityakhatri.colcm1cq',
-            }}
+const tooltipOptions = {
+    closeOnClick: false,
+    closeButton: false,
+    offset: 8,
+};
+
+export const NativeHoverableMap = () => {
+    const [coordinates, setCoordinates] = useState(undefined);
+    const handleMouseEnter = useCallback(
+        (_, c) => {
+            setCoordinates(c);
+        },
+        [setCoordinates],
+    );
+
+    const handleMouseLeave = useCallback(
+        () => {
+            setCoordinates(undefined);
+        },
+        [setCoordinates],
+    );
+    return (
+        <Map
+            mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+            mapOptions={mapOptions}
+            scaleControlShown
+            navControlShown
         >
-            <MapLayer
-                layerKey="province"
-                layerOptions={{
-                    'source-layer': 'provincegeo',
-                    type: 'line',
-                    paint: {
-                        'line-color': '#ff0000',
-                        'line-width': 3,
-                    },
-                }}
+            <MapBounds
+                bounds={mapOptions.bounds}
+                padding={50}
             />
-        </MapSource>
-        <MapTooltip
-            coordinates={mapOptions.center}
-            tooltipOptions={{
-                closeOnClick: false,
-                closeButton: false,
-            }}
-        >
-            <>
-                <h1> Example </h1>
-                <p> Tooltips are great to show information over map and marker points. </p>
-            </>
-        </MapTooltip>
-        <MapContainer
-            className={styles.map}
-        />
-    </Map>
-);
-TooltipMap.story = {
-    name: 'With tooltip map',
+            <MapSource
+                sourceKey="nepal"
+                sourceOptions={{
+                    type: 'vector',
+                    url: 'mapbox://adityakhatri.colcm1cq',
+                }}
+            >
+                <MapLayer
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    layerKey="district-fill"
+                    layerOptions={{
+                        'source-layer': 'districtgeo',
+                        type: 'fill',
+                        paint: {
+                            'fill-color': 'red',
+                            'fill-opacity': ['case',
+                                ['boolean', ['feature-state', 'hovered'], false],
+                                0.5,
+                                0.2,
+                            ],
+                        },
+                    }}
+                />
+                <MapLayer
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    layerKey="province-fill"
+                    layerOptions={{
+                        'source-layer': 'provincegeo',
+                        type: 'fill',
+                        paint: {
+                            'fill-color': 'green',
+                            'fill-opacity': ['case',
+                                ['boolean', ['feature-state', 'hovered'], false],
+                                0.5,
+                                0.2,
+                            ],
+                        },
+                        filter: [
+                            '==',
+                            'title',
+                            'Province 5',
+                        ],
+                    }}
+                />
+            </MapSource>
+            {coordinates && (
+                <MapTooltip
+                    coordinates={coordinates}
+                    tooltipOptions={tooltipOptions}
+                    trackPointer
+                >
+                    <div>
+                        Tooltip
+                    </div>
+                </MapTooltip>
+            )}
+            <MapContainer
+                className={styles.map}
+            />
+        </Map>
+    );
+};
+NativeHoverableMap.story = {
+    name: 'With native hoverable feature map',
 };
