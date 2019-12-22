@@ -1,8 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
+
+import Button from '#rsu/../v2/Action/Button';
 
 import Map from '#re-map';
 import MapContainer from '#re-map/MapContainer';
 import MapBounds from '#re-map/MapBounds';
+import MapShapeEditor from '#re-map/MapShapeEditor';
 import MapSource from '#re-map/MapSource';
 import MapLayer from '#re-map/MapSource/MapLayer';
 import MapState from '#re-map/MapSource/MapState';
@@ -41,6 +44,130 @@ const selectedAttributes = [
         value: true,
     },
 ];
+
+const sourceOptions = {
+    type: 'geojson',
+};
+
+const geoJsonFillOptions = {
+    id: 'not-required',
+    type: 'fill',
+    paint: {
+        'fill-color': 'red',
+        'fill-opacity': 0.3,
+    },
+    filter: ['==', '$type', 'Polygon'],
+};
+
+const geoJsonCircleOptions = {
+    id: 'not-required-much',
+    type: 'circle',
+    paint: {
+        'circle-color': 'red',
+        'circle-opacity': 0.3,
+        'circle-radius': 5,
+    },
+    filter: ['==', '$type', 'Point'],
+};
+
+export const LayerDrawMap = () => {
+    const [mode, setMode] = useState('simple_select');
+
+    const [editMode, setEditMode] = useState(false);
+    const [geoJsons, setGeoJsons] = useState([]);
+
+    const handleCreate = useCallback(
+        (features) => {
+            const newJsons = [...geoJsons, ...features];
+            setGeoJsons(newJsons);
+        },
+        [geoJsons],
+    );
+
+    const handleDelete = useCallback(
+        (features) => {
+            const copy = [...geoJsons];
+            features.forEach((feature) => {
+                const index = geoJsons.findIndex(geoJson => geoJson.id === feature.id);
+                copy.splice(index, 1);
+            });
+            setGeoJsons(copy);
+        },
+        [geoJsons],
+    );
+
+    const handleUpdate = useCallback(
+        (features) => {
+            const copy = [...geoJsons];
+            features.forEach((feature) => {
+                const index = geoJsons.findIndex(geoJson => geoJson.id === feature.id);
+                copy[index] = feature;
+            });
+            setGeoJsons(copy);
+        },
+        [geoJsons],
+    );
+
+    return (
+        <Map
+            mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+            mapOptions={mapOptions}
+            scaleControlShown
+            navControlShown
+        >
+            <MapContainer
+                className={styles.map}
+            />
+            <MapBounds
+                bounds={mapOptions.bounds}
+                padding={50}
+            />
+            {editMode && (
+                <MapShapeEditor
+                    onCreate={handleCreate}
+                    onDelete={handleDelete}
+                    onUpdate={handleUpdate}
+                    onModeChange={setMode}
+
+                    geoJsons={geoJsons}
+                />
+            )}
+            {!editMode && geoJsons.map(geoJson => (
+                <MapSource
+                    key={geoJson.id}
+                    sourceKey={geoJson.id}
+                    sourceOptions={sourceOptions}
+                    geoJson={geoJson}
+                >
+                    <MapLayer
+                        layerKey="fill"
+                        layerOptions={geoJsonFillOptions}
+                    />
+                    <MapLayer
+                        layerKey="circle"
+                        layerOptions={geoJsonCircleOptions}
+                    />
+                </MapSource>
+            ))}
+            <Button
+                onClick={() => {
+                    setEditMode(!editMode);
+                }}
+            >
+                {`Currently editing: ${editMode}`}
+            </Button>
+            <div>
+                {`Mode: ${mode}`}
+            </div>
+            <div>
+                {`Total features: ${geoJsons.length}`}
+            </div>
+        </Map>
+    );
+};
+LayerDrawMap.story = {
+    name: 'With layer draw',
+};
 
 export const VectorLayersMap = () => (
     <Map
