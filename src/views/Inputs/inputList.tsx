@@ -20,7 +20,7 @@ import SearchMultiSelectInput from '#rsci/SearchMultiSelectInput';
 import SearchSelectInput from '#rsci/SearchSelectInput';
 import SegmentInput from '#rsci/SegmentInput';
 import SelectInput from '#rsci/SelectInput';
-import SelectInputWithList from '#rsci/SelectInputWithList';
+// import SelectInputWithList from '#rsci/SelectInputWithList';
 import TextArea from '#rsci/TextArea';
 import TextInput from '#rsci/TextInput';
 import TimeFilter from '#rsci/TimeFilter';
@@ -370,10 +370,12 @@ const inputList: InputElement[] = [
         },
         groupKey: 'Multi Selection',
     },
+    /*
     {
         key: 'selectInputWithList',
         title: 'Select input with list',
-        description: 'Similar to Multi Select Input and additionally, selected items are listed separately',
+        description:
+        'Similar to Multi Select Input and additionally, selected items are listed separately',
         component: SelectInputWithList,
         props: {
             label: 'Vegetables',
@@ -382,6 +384,7 @@ const inputList: InputElement[] = [
         },
         groupKey: 'Multi Selection',
     },
+    */
 
     // Misc inputs
     {
