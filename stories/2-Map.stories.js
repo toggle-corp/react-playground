@@ -683,3 +683,90 @@ export const NativeHoverableMap = () => {
 NativeHoverableMap.story = {
     name: 'With native hoverable feature map',
 };
+
+export const NativeHoverableWithStateMap = () => {
+    const [districtHoverId, setDistrictHoverId] = useState(undefined);
+
+    const KASKI_ID = 46;
+
+    const districtHovers = useMemo(
+        () => {
+            if (districtHoverId === undefined) {
+                return [];
+            }
+            return [{ id: districtHoverId, value: true }];
+        },
+        [districtHoverId],
+    );
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.left}>
+                <div
+                    onMouseEnter={() => {
+                        setDistrictHoverId(KASKI_ID);
+                    }}
+                    onMouseLeave={() => {
+                        setDistrictHoverId(undefined);
+                    }}
+                    style={{
+                        backgroundColor: districtHoverId === KASKI_ID ? 'yellow' : 'white',
+                    }}
+                >
+                    Kaski
+                </div>
+            </div>
+            <Map
+                mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+                mapOptions={mapOptions}
+                scaleControlShown
+                navControlShown
+            >
+                <MapBounds
+                    bounds={mapOptions.bounds}
+                    padding={50}
+                />
+                <MapSource
+                    sourceKey="nepal"
+                    sourceOptions={{
+                        type: 'vector',
+                        url: 'mapbox://adityakhatri.colcm1cq',
+                    }}
+                >
+                    <MapLayer
+                        onMouseEnter={(feature) => {
+                            setDistrictHoverId(feature.id);
+                        }}
+                        onMouseLeave={() => {
+                            setDistrictHoverId(undefined);
+                        }}
+                        layerKey="district-fill"
+                        layerOptions={{
+                            'source-layer': 'districtgeo',
+                            type: 'fill',
+                            paint: {
+                                'fill-color': 'red',
+                                'fill-opacity': ['case',
+                                    ['boolean', ['feature-state', 'hover'], false],
+                                    0.5,
+                                    0.2,
+                                ],
+                            },
+                        }}
+                    />
+                    <MapState
+                        sourceLayer="districtgeo"
+                        attributes={districtHovers}
+                        attributeKey="hover"
+                    />
+                </MapSource>
+                <MapContainer
+                    className={styles.right}
+                />
+            </Map>
+        </div>
+    );
+};
+NativeHoverableWithStateMap.story = {
+    name: 'With native hoverable feature map and side-bar',
+};

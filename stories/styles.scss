@@ -1,3 +1,16 @@
 .map {
     height: 80vh;
 }
+
+.container {
+    display: flex;
+    height: 80vh;
+
+    .left {
+        width: 300px;
+    }
+
+    .right {
+        flex-grow: 1;
+    }
+}
