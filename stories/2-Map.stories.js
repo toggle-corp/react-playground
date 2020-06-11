@@ -45,10 +45,6 @@ const selectedAttributes = [
     },
 ];
 
-const sourceOptions = {
-    type: 'geojson',
-};
-
 const geoJsonFillOptions = {
     id: 'not-required',
     type: 'fill',
@@ -197,11 +193,54 @@ export const LayerDrawMap = () => {
     const [mode, setMode] = useState('simple_select');
 
     const [editMode, setEditMode] = useState(false);
-    const [geoJsons, setGeoJsons] = useState([]);
+    const [geoJsons, setGeoJsons] = useState([
+        {
+            id: 'hari',
+            type: 'Feature',
+            geometry: {
+                type: 'Polygon',
+                coordinates: [
+                    [
+                        [83.40612677290363, 28.541178881358036],
+                        [84.21525456675533, 28.528963224917845],
+                        [84.03389833710014, 27.81801041995429],
+                        [83.40612677290363, 28.541178881358036],
+                    ],
+                ],
+            },
+            properties: {
+                color: 'red',
+                code: 2,
+            },
+        },
+        {
+            id: 'shyam',
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [
+                    84.62858932054638,
+                    27.778619058603084,
+                ],
+            },
+            properties: {
+                code: 1,
+                color: 'red',
+            },
+        },
+    ]);
 
     const handleCreate = useCallback(
         (features) => {
-            const newJsons = [...geoJsons, ...features];
+            const maxValue = Math.max(0, ...geoJsons.map(item => item.properties.code));
+            const newFeatures = features.map((feature, index) => ({
+                ...feature,
+                properties: {
+                    ...feature.properties,
+                    code: maxValue + index + 1,
+                },
+            }));
+            const newJsons = [...geoJsons, ...newFeatures];
             setGeoJsons(newJsons);
         },
         [geoJsons],
@@ -259,7 +298,10 @@ export const LayerDrawMap = () => {
                 <MapSource
                     key={geoJson.id}
                     sourceKey={geoJson.id}
-                    sourceOptions={sourceOptions}
+                    sourceOptions={{
+                        type: 'geojson',
+                        promoteId: 'code',
+                    }}
                     geoJson={geoJson}
                 >
                     <MapLayer
